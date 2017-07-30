@@ -1,8 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="report name" pageWidth="595" pageHeight="842" whenNoDataType="AllSectionsNoDetail" columnWidth="535" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="fd58ff87-ce7d-42ed-b21f-400604d51bab">
-	<property name="ireport.zoom" value="0.75"/>
-	<property name="ireport.x" value="0"/>
+	<property name="ireport.zoom" value="1.5"/>
+	<property name="ireport.x" value="38"/>
 	<property name="ireport.y" value="0"/>
+	<parameter name="fecha1" class="java.util.Date">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="fecha2" class="java.util.Date">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="estado" class="java.lang.String">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
 	<queryString>
 		<![CDATA[select v.idvuelo,
 o.aeropuerto as origen,
@@ -11,7 +20,7 @@ v.fecha as fecha_hora_salida,
 v.estado,
 a.descripcion as avion
 from avion a, aeropuerto o, aeropuerto d, vuelo v
-where a.idavion = v.idavion and
+where a.idavion = v.idavion and v.fecha between $P{fecha1} and $P{fecha2} and $P!{estado} and
 o.idaeropuerto=v.idorigen and d.idaeropuerto=v.iddestino]]>
 	</queryString>
 	<field name="idvuelo" class="java.lang.Long">
@@ -43,7 +52,24 @@ o.idaeropuerto=v.idorigen and d.idaeropuerto=v.iddestino]]>
 		</band>
 	</title>
 	<pageHeader>
-		<band height="35" splitType="Stretch"/>
+		<band height="35" splitType="Stretch">
+			<textField pattern="dd/MM/yyyy">
+				<reportElement x="44" y="15" width="100" height="20" uuid="3d16b8a2-aa20-415a-bec4-fb555087a9b0"/>
+				<textFieldExpression><![CDATA[$P{fecha1}]]></textFieldExpression>
+			</textField>
+			<textField pattern="dd/MM/yyyy">
+				<reportElement x="188" y="15" width="100" height="20" uuid="7f8ed246-4913-4a82-9291-a4f2362484ea"/>
+				<textFieldExpression><![CDATA[$P{fecha2}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="0" y="15" width="44" height="20" uuid="3965283d-eb20-4adb-b8d2-1a396344b090"/>
+				<text><![CDATA[Fecha:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="144" y="15" width="44" height="20" uuid="bbeb2d49-339e-41e5-9c9f-9990c58791a0"/>
+				<text><![CDATA[Hasta]]></text>
+			</staticText>
+		</band>
 	</pageHeader>
 	<columnHeader>
 		<band height="20" splitType="Stretch">

@@ -15,6 +15,8 @@
     </properties>
     
     <dependencies>
+
+    
         <dependency>
             <groupId>org.eclipse.persistence</groupId>
             <artifactId>eclipselink</artifactId>
@@ -59,9 +61,25 @@
             <artifactId>jasperreports</artifactId>
             <version>6.4.1</version>
         </dependency>
-
+    <dependency>
+	<groupId>org.primefaces.themes</groupId>
+	<artifactId>all-themes</artifactId>
+	<version>1.0.10</version>
+    </dependency>
+    <dependency>
+        <groupId>org.webjars</groupId>
+        <artifactId>font-awesome</artifactId>
+        <version>4.7.0</version>
+    </dependency>
     </dependencies>
-
+    <repositories>
+        <repository>
+            <id>prime-repo</id>
+            <name>PrimeFaces Maven Repository</name>
+            <url>http://repository.primefaces.org</url>
+            <layout>default</layout>
+        </repository>
+    </repositories>
     <build>
         <plugins>
             <plugin>
